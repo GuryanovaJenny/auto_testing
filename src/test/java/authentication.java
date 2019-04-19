@@ -31,24 +31,24 @@ public class authentication extends auto_settings{
     }
 
     public void signIn(){
-        //ждем пока страница загрузится
+        // wait until the page download
         waitTest.until(ExpectedConditions.visibilityOfElementLocated(By.className("header2__nav")));
-        //войти в аккаунт
+        // press the Sign In button
         driver.findElement(By.cssSelector("div.header2__nav > div")).click();
-        //вводим логин
+        // introduce login
         driver.findElement(By.xpath("//input[@name='login']")).sendKeys("jenny.guryanova@yandex.ru");
-        //нажатие на кнопку "Войти"
+        // press button "Войти"
         driver.findElement(By.xpath("//button[@type='submit']")).click();
-        //ждем появления пароля
+        // wait until the password appear
         (new WebDriverWait(driver, 10)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@id='passp-field-passwd']")));
         driver.findElement(By.xpath("//input[@id='passp-field-passwd']")).sendKeys("Yamomoto80Slim");
-        //нажатие на кнопку "Войти"
+        // press button "Войти"
         driver.findElement(By.xpath("//button[@type='submit']")).click();
     }
 
     @AfterTest
     public void signOut(){
-        //переходим в "Мой аккаунт" и нажимаем "Выйти"
+        // go to "Мой аккаунт" and press "Выход"
         Actions actor = new Actions(driver);
         WebElement myProfile = waitTest.until
                 (ExpectedConditions.presenceOfElementLocated(By.className("header2__nav")));
@@ -59,11 +59,11 @@ public class authentication extends auto_settings{
 
     @Test
     public void navigateToBeruAuthPage(){
-        //убираем рекламный баннер
+        // closing pop-up window
 //        driver.findElement(By.cssSelector("div.modal__content > div")).click();
-        //входим в аккаунт
+        // preforms steps to sign in
         signIn();
-        //проверка соответствия названия заголовка
+        // test of changing button text from "Войти в аккаунт" to "Мой профиль"
         (new WebDriverWait(driver, 10)).until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.header2__nav")));
         Assert.assertEquals(driver.findElement(By.cssSelector("div.header2-nav__user")).getText(), "Мой профиль",
                 "Кнопка входа профиля не найдена");
@@ -74,39 +74,39 @@ public class authentication extends auto_settings{
 
     @Test
     public void regionChangeTest() {
-        //убираем рекламный баннер
+        // closing pop-up window
 //        driver.findElement(By.className("_1ZYDKa22GJ")).click();
-        //нажимаем на текущий регион, чтобы сменить его
+        // element with region name on the top of the main page
         WebElement regions_line = driver.findElement(By.className("region-form-opener"))
                 .findElement(By.className("link__inner"));
         regions_line.click();
-        //ждем, пока появится окно смены региона
+        // region input popup
         WebElement districtPopup = waitTest.until
                 (ExpectedConditions.presenceOfElementLocated(By.className("region-select-form")));
-        //находим поле ввода региона
+        // region input field
         WebElement regionField = districtPopup.findElement(By.className("input__control"));
         regionField.sendKeys(newRegionName);
-        // ждем, пока появится список регионов и выбираем заданный
+        // wait until entered text is displayed on popup
         waitTest.until(ExpectedConditions.visibilityOfElementLocated(By.className("region-suggest__list-item"))).click();
-        //нажать на кнопку "Продолжить с новым регионом"
+        // submit changes
         districtPopup.findElement(By.className("button2")).click();
-        //ждем, пока страница загрузится (элементы "footer social media" всегда загружаются последними)
+        // wait until page loading is complete (footer social media elements are always loaded last)
         waitTest.until(ExpectedConditions.visibilityOfElementLocated(By.className("footer__social-media")));
-        //находим элемент с названием региона на странице
+        // region name line on the top of the main page
         regions_line = driver.findElement(By.className("region-form-opener")).findElement(By.className("link__inner"));
-        //проверяем, что название региона изменилось на заданное
+        // test of city name changes
         Assert.assertEquals(newRegionName, regions_line.getText(),
                 "Region name on main page wasn't changed to" + newRegionName);
-        //входим в аккаунт
+        // preforms steps to sign in
         signIn();
-        //переходим в настройки аккаунта
+        // goes to account settings
         Actions actor = new Actions(driver);
         WebElement myProfile = waitTest.until
                 (ExpectedConditions.presenceOfElementLocated(By.className("header2__nav")));
         actor.moveToElement(myProfile).build().perform();
         waitTest.until(ExpectedConditions.presenceOfElementLocated(By.className("header2-user-menu")));
         driver.findElement(By.className("header2-user-menu")).findElement(By.linkText("Настройки")).click();
-        //проверяем, что регион в настройках идентичен региону вверху страницы
+        // region name on settings page
         WebElement myRegion = waitTest.until(ExpectedConditions.presenceOfElementLocated
                 (By.className("settings-list__title"))).findElement(By.className("link__inner"));
         regions_line = driver.findElement(By.className("region-form-opener")).findElement(By.className("link__inner"));

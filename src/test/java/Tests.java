@@ -1,17 +1,19 @@
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
-import org.testng.annotations.*;
+import org.testng.annotations.Test;
 import testClasses.AccountAuthorization;
 import testClasses.Auto_settings;
+import org.testng.annotations.DataProvider;
 import testClasses.MainPage;
 import testClasses.SettingsPage;
 
 public class Tests extends Auto_settings {
+
+    @DataProvider(name = "regionChangeTest")
+    public Object[][] createData(){
+        return new Object[][]{
+                {"Саратов"},
+                {"Хвалынск"}
+        };
+    }
 
     @Test
     public void navigateToBeruAuthPage() {
@@ -27,15 +29,15 @@ public class Tests extends Auto_settings {
         home.enterCheck();
     }
 
-    @Test
-    public void regionChangeTest() {
+    @Test (dataProvider = "regionChangeTest")
+    public void regionChangeTest(String newRegionName) {
         MainPage home = new MainPage(getDriver(), getWaitTest());
         // element with region name on the top of the main page
         home.pressRegionChangeButton();
-        // enter the "Хвалынск" region
-        home.enterRegion();
-        // select "Хвалынск" from region list
-        home.selectRegion();
+        // enter region
+        home.enterRegion(newRegionName);
+        // select from region list
+        home.selectRegion(newRegionName);
         // click to "Войти в аккаунт"
         home.clickLoginButton();
 
@@ -43,6 +45,9 @@ public class Tests extends Auto_settings {
         // preforms steps to sign in
         accEnter.enterLogin();
         accEnter.enterPassword();
+
+        // go to account settings
+        home.clickSettingsButton();
 
         SettingsPage settings = new SettingsPage(getDriver());
         // check that name of the region is change correct

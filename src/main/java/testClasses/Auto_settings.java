@@ -47,5 +47,8 @@ public class Auto_settings{
         actor.moveToElement(myProfile).build().perform();
         waitTest.until(ExpectedConditions.presenceOfElementLocated(By.className("header2-user-menu")));
         driver.findElement(By.className("header2-user-menu")).findElement(By.linkText("Выход")).click();
+
+        // close driver
+        driver.quit();
     }
 }

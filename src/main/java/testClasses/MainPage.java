@@ -2,6 +2,7 @@ package testClasses;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -12,7 +13,6 @@ public class MainPage {
     private WebDriver driver;
     private WebDriverWait waitTest;
 
-    private static String newRegionName = "Хвалынск";
     private WebElement regions_line;
 
     public MainPage(WebDriver driver, WebDriverWait waitTest){
@@ -36,11 +36,11 @@ public class MainPage {
         regions_line.click();
     }
 
-    public void enterRegion(){
+    public void enterRegion(String newRegionName){
         driver.findElement(By.xpath("//input[@class='input__control']")).sendKeys(newRegionName);
     }
 
-    public void selectRegion(){
+    public void selectRegion(String newRegionName){
         // wait until entered text is displayed on popup
         waitTest.until(ExpectedConditions.visibilityOfElementLocated(By.className("suggestick-list"))).click();
         // submit changes
@@ -51,6 +51,13 @@ public class MainPage {
         regions_line = driver.findElement(By.className("region-form-opener")).findElement(By.className("link__inner"));
         // test of region name changes
         Assert.assertEquals(newRegionName, regions_line.getText(),
-                "Region name on main page wasn't changed to" + newRegionName);
+                "Region name on main page wasn't changed to " + newRegionName);
+    }
+
+    public void clickSettingsButton(){
+        Actions actor = new Actions(driver);
+        actor.moveToElement(driver.findElement(By.cssSelector("span.header2-nav-item__icon." +
+                "header2-nav-item__icon_type_profile"))).build().perform();
+        driver.findElement(By.className("header2-user-menu__item_type_settings")).click();//.findElement(By.linkText("Настройки")).click();
     }
 }

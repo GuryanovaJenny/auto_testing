@@ -1,9 +1,6 @@
 import org.testng.annotations.Test;
-import testClasses.AccountAuthorization;
-import testClasses.Auto_settings;
+import testClasses.*;
 import org.testng.annotations.DataProvider;
-import testClasses.MainPage;
-import testClasses.SettingsPage;
 
 public class Tests extends Auto_settings {
 
@@ -54,13 +51,33 @@ public class Tests extends Auto_settings {
         settings.checkDeliveryRegionName();
     }
 
-/*    @Test
+    @Test
     public void toothbrushTest(){
-        // preforms steps to sign in
-        signIn();
-
+        MainPage home = new MainPage(getDriver(), getWaitTest());
         // click on catalog button
-        driver.findElement(By.className("header2__navigation")).click();
+        home.pressCatalogButton();
+        // click on Electric Toothbrushes
+        home.chooseElectricToothbrushes();
+
+        ToothbrushesShoppingPage toothbrush = new ToothbrushesShoppingPage(getDriver(), getWaitTest());
+        // choose the range of prices
+        toothbrush.enterPriceRange();
+        // open all toothbrushes
+        toothbrush.showMoreToothbrushes();
+        toothbrush.checkPriceRange();
+
+        // add toothbrush and go to the cart page
+        toothbrush.addToothbrush();
+        toothbrush.clickCartButton();
+
+        // check free delivery and total price
+        ShoppingCartPage cart = new ShoppingCartPage(getDriver(), getWaitTest());
+        cart.checkDelivery();
+        int totalPrice = cart.checkTotalPrice();
+        // add one more toothbrush and check it again
+        cart.addItemsForFreeDelivery(totalPrice);
+        cart.checkFreeDelivery();
+        cart.checkTotalPriceWithFreeDelivery();
     }
-*/
+
 }

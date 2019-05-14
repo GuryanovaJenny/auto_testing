@@ -41,13 +41,12 @@ public class Auto_settings{
     @AfterMethod
     public void signOut() {
         // go to "Мой аккаунт" and press "Выход"
-        Actions actor = new Actions(driver);
-        WebElement myProfile = waitTest.until
-                (ExpectedConditions.presenceOfElementLocated(By.className("header2-nav__user")));
-        actor.moveToElement(myProfile).build().perform();
-        waitTest.until(ExpectedConditions.presenceOfElementLocated(By.className("header2-user-menu")));
-        driver.findElement(By.className("header2-user-menu")).findElement(By.linkText("Выход")).click();
-
+        WebElement profileName = waitTest.until
+                (ExpectedConditions.visibilityOfElementLocated(By.className("header2__nav")));
+        if (profileName.getText().equals("Мой профиль")) {
+            profileName.click();
+            driver.findElement(By.linkText("Выход")).click();
+        }
         // close driver
         driver.quit();
     }

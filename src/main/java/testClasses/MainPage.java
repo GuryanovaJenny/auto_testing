@@ -58,6 +58,22 @@ public class MainPage {
         Actions actor = new Actions(driver);
         actor.moveToElement(driver.findElement(By.cssSelector("span.header2-nav-item__icon." +
                 "header2-nav-item__icon_type_profile"))).build().perform();
-        driver.findElement(By.className("header2-user-menu__item_type_settings")).click();//.findElement(By.linkText("Настройки")).click();
+        driver.findElement(By.className("header2-user-menu__item_type_settings")).click();
     }
+
+    public void pressCatalogButton(){
+        driver.findElement(By.cssSelector("div.n-topmenu-new-vertical__left > div > button")).click();
+    }
+
+    public void chooseElectricToothbrushes(){
+        // waiting for opening the list of categories
+        WebElement categoryList = waitTest.until(ExpectedConditions
+                                                .visibilityOfElementLocated(By.className("popup2__content")));
+        // mouse over beauty and hygiene category
+        Actions actor = new Actions(driver);
+        actor.moveToElement(categoryList.findElement(By.linkText("Красота и гигиена"))).build().perform();
+        // click on electric toothbrushes subcategory
+        driver.findElement(By.linkText("Электрические зубные щетки")).click();
+    }
+
 }

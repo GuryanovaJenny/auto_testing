@@ -17,18 +17,18 @@ public class ShoppingCartPage {
     private By deliveryText = By.cssSelector("span._3EX9adn_xp");
     private By basketInformation = By.cssSelector("div._1n63a5bOO8");
 
-    public ShoppingCartPage(WebDriver driver, WebDriverWait waitTest){
+    public ShoppingCartPage(WebDriver driver, WebDriverWait waitTest) {
         this.driver = driver; this.waitTest = waitTest;
     }
 
     @Step("Check free delivery")
-    public void checkDelivery(){
+    public void checkDelivery() {
         WebElement delivery = driver.findElement(deliveryText);
         Assert.assertTrue(delivery.getText().contains("До бесплатной доставки"));
     }
 
     @Step("Check total price")
-    public int checkTotalPrice(){
+    public int checkTotalPrice() {
         waitTest.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(basketInformation));
         int totalPrice = Integer.parseInt(driver.findElement(totalPriceText).getText().
                 replaceAll("\\D",""));
@@ -41,7 +41,7 @@ public class ShoppingCartPage {
     }
 
     @Step("Add items in the cart for free delivery")
-    public void addItemsForFreeDelivery(int totalItem){
+    public void addItemsForFreeDelivery(int totalItem) {
         int freeDelivery = totalItem;
         while(freeDelivery <= 2999){
             driver.findElement(By.cssSelector("button._4qhIn2-ESi._2sJs248D-A._18c2gUxCdP._3hWhO4rvmA")).click();
@@ -50,14 +50,14 @@ public class ShoppingCartPage {
     }
 
     @Step("Check free delivery")
-    public void checkFreeDelivery(){
+    public void checkFreeDelivery() {
         waitTest.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//span[text()='бесплатно']")));
         WebElement delivery = driver.findElement(deliveryText);
         Assert.assertTrue(delivery.getText().contains("бесплатную доставку"));
     }
 
     @Step("Check total price with free delivery")
-    public void checkTotalPriceWithFreeDelivery(){
+    public void checkTotalPriceWithFreeDelivery() {
         waitTest.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(basketInformation));
         int totalPrice = Integer.parseInt(driver.findElement(totalPriceText).getText().
                 replaceAll("\\D",""));

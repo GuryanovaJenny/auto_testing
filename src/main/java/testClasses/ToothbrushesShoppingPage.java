@@ -15,23 +15,23 @@ public class ToothbrushesShoppingPage {
     private WebDriver driver;
     private WebDriverWait waitTest;
 
-    public ToothbrushesShoppingPage(WebDriver driver, WebDriverWait waitTest){
+    public ToothbrushesShoppingPage(WebDriver driver, WebDriverWait waitTest) {
         this.driver = driver; this.waitTest = waitTest;
     }
 
     @Step("Enter price range")
-    public void enterPriceRange(){
+    public void enterPriceRange() {
         driver.findElement(By.xpath("//input[@name='Цена от']")).sendKeys("999");
         driver.findElement(By.xpath("//input[@name='Цена до']")).sendKeys("1999");
         waitTest.until(ExpectedConditions.visibilityOfElementLocated((By.cssSelector("div.NZiH_Kn8Fj"))));
     }
 
     @Step("Show all electric toothbrushes")
-    public void showMoreToothbrushes(){
+    public void showMoreToothbrushes() {
         WebElement showMoreButton = driver.findElement(By.xpath("//div[@class='n-pager-more__button " +
                 "pager-loader_preload']"));
 
-        while(showMoreButton.isDisplayed()){
+        while(showMoreButton.isDisplayed()) {
             showMoreButton.click();
             // wait for all prices to load
             waitTest.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector
@@ -50,14 +50,14 @@ public class ToothbrushesShoppingPage {
     }
 
     @Step("Add the toothbrush")
-    public void addToothbrush(){
+    public void addToothbrush() {
         List<WebElement> cartButtonList = driver.findElements(By.cssSelector("button._4qhIn2-ESi._3OWdR9kZRH." +
-                "THqSbzx07u"));
+                                                                                "THqSbzx07u"));
         cartButtonList.get(cartButtonList.size() - 2).click();
     }
 
     @Step("Click on the cart button")
-    public void clickCartButton(){
+    public void clickCartButton() {
         waitTest.until(ExpectedConditions.textToBePresentInElementLocated
                 (By.className("_3UjOWy-LbN"), "Товар добавлен в корзину!"));
         driver.findElement(By.linkText("Перейти в корзину")).click();

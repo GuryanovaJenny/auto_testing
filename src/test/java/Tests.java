@@ -1,12 +1,14 @@
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import testClasses.*;
 import org.testng.annotations.DataProvider;
 
+@Listeners(TestListener.class)
 public class Tests extends Auto_settings {
 
     @DataProvider(name = "regionChangeTest")
-    public Object[][] createData(){
-        return new Object[][]{
+    public Object[][] createData() {
+        return new Object[][] {
                 {"Саратов"},
                 {"Хвалынск"}
         };
@@ -52,7 +54,7 @@ public class Tests extends Auto_settings {
     }
 
     @Test
-    public void toothbrushTest(){
+    public void toothbrushTest() {
         MainPage home = new MainPage(getDriver(), getWaitTest());
         // click on catalog button
         home.pressCatalogButton();

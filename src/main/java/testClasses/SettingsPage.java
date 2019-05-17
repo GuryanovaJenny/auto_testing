@@ -10,16 +10,15 @@ public class SettingsPage {
 
     private static WebDriver driver;
 
-    public SettingsPage(WebDriver driver){
+    public SettingsPage(WebDriver driver) {
         SettingsPage.driver = driver;
     }
 
     @Step("Check region name and delivery region name")
-    public void checkDeliveryRegionName(){
+    public void checkDeliveryRegionName() {
         WebElement regions_line = driver.findElement(By.className("region-form-opener"))
                                         .findElement(By.className("link__inner"));
-        Assert.assertEquals(regions_line.getText(), driver
-                                                    .findElement(By.className("settings-list__title"))
+        Assert.assertEquals(regions_line.getText(), driver.findElement(By.className("settings-list__title"))
                                                     .findElement(By.className("link__inner")).getText(),
                 "Region name on the top of the page is not equal to the region name in settings");
     }

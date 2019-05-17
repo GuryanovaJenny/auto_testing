@@ -24,7 +24,7 @@ public class WebDriverEventListener extends AbstractWebDriverEventListener {
     }
 
     @Override
-    public void afterChangeValueOf(WebElement element, WebDriver driver, java.lang.CharSequence[] keysToSend){
+    public void afterChangeValueOf(WebElement element, WebDriver driver, java.lang.CharSequence[] keysToSend) {
         getScreenshot();
     }
 }

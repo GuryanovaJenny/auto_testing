@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
@@ -16,9 +17,9 @@ import java.util.concurrent.TimeUnit;
 
 public class Auto_settings{
 
-    private WebDriver driver;
+    private static EventFiringWebDriver driver;
     private WebDriverWait waitTest;
-    protected WebDriver getDriver(){
+    protected static WebDriver getDriver(){
         return driver;
     }
     protected WebDriverWait getWaitTest(){
@@ -31,7 +32,9 @@ public class Auto_settings{
     @BeforeMethod
     public void setupTest() {
         WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
+        driver = new EventFiringWebDriver (new ChromeDriver());
+        driver.register(new WebDriverEventListener());
+
         driver.manage().window().maximize();
         driver.get("https://beru.ru/");
         waitTest = new WebDriverWait(driver, 10);

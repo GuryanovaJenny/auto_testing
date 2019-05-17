@@ -1,0 +1,7 @@
+<suite name = "MySuite">
+    <test name="Beru">
+    	<packages>
+    		<package name="testClasses" />
+   		</packages>
+    </test>
+</suite>

@@ -1,0 +1,8 @@
+testClasses\AccountAuthorization.class
+testClasses\TestListener.class
+testClasses\WebDriverEventListener.class
+testClasses\ToothbrushesShoppingPage.class
+testClasses\SettingsPage.class
+testClasses\ShoppingCartPage.class
+testClasses\Auto_settings.class
+testClasses\MainPage.class

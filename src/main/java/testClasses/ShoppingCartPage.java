@@ -1,5 +1,6 @@
 package testClasses;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -20,11 +21,13 @@ public class ShoppingCartPage {
         this.driver = driver; this.waitTest = waitTest;
     }
 
+    @Step("Check free delivery")
     public void checkDelivery(){
         WebElement delivery = driver.findElement(deliveryText);
         Assert.assertTrue(delivery.getText().contains("До бесплатной доставки"));
     }
 
+    @Step("Check total price")
     public int checkTotalPrice(){
         waitTest.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(basketInformation));
         int totalPrice = Integer.parseInt(driver.findElement(totalPriceText).getText().
@@ -37,6 +40,7 @@ public class ShoppingCartPage {
         return totalItem;
     }
 
+    @Step("Add items in the cart for free delivery")
     public void addItemsForFreeDelivery(int totalItem){
         int freeDelivery = totalItem;
         while(freeDelivery <= 2999){
@@ -45,12 +49,14 @@ public class ShoppingCartPage {
         }
     }
 
+    @Step("Check free delivery")
     public void checkFreeDelivery(){
         waitTest.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//span[text()='бесплатно']")));
         WebElement delivery = driver.findElement(deliveryText);
         Assert.assertTrue(delivery.getText().contains("бесплатную доставку"));
     }
 
+    @Step("Check total price with free delivery")
     public void checkTotalPriceWithFreeDelivery(){
         waitTest.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(basketInformation));
         int totalPrice = Integer.parseInt(driver.findElement(totalPriceText).getText().

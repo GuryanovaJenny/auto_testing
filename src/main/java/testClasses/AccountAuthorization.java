@@ -1,5 +1,6 @@
 package testClasses;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -13,6 +14,7 @@ public class AccountAuthorization{
         this.driver = driver;
     }
 
+    @Step("Enter login")
     public void enterLogin() {
         // introduce login
         driver.findElement
@@ -21,6 +23,7 @@ public class AccountAuthorization{
         driver.findElement(By.xpath("//button[@type='submit']")).click();
     }
 
+    @Step("Enter password")
     public void enterPassword() {
         // wait until the password appear
         (new WebDriverWait(driver, 10)).until(ExpectedConditions.visibilityOfElementLocated

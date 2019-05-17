@@ -1,5 +1,6 @@
 package testClasses;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -19,11 +20,13 @@ public class MainPage {
         this.driver = driver; this.waitTest = waitTest;
     }
 
+    @Step("Click loginButton on HomePage")
     public void clickLoginButton(){
         driver.findElement(By.xpath("//span[@title='Войти в аккаунт']")).click();
     }
 
     // check button text changes from "Войти в аккаунт" to "Мой профиль"
+    @Step("Check login button text changes")
     public void enterCheck(){
         (new WebDriverWait(driver, 10))
                 .until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.header2__nav")));
@@ -31,15 +34,18 @@ public class MainPage {
                 "Кнопка входа профиля не найдена");
     }
 
+    @Step("Press the region change button")
     public void pressRegionChangeButton(){
         regions_line = driver.findElement(By.className("region-form-opener")).findElement(By.className("link__inner"));
         regions_line.click();
     }
 
+    @Step("Enter new region")
     public void enterRegion(String newRegionName){
         driver.findElement(By.xpath("//input[@class='input__control']")).sendKeys(newRegionName);
     }
 
+    @Step("Select the region and click ContinueWithNewRegion button")
     public void selectRegion(String newRegionName){
         // wait until entered text is displayed on popup
         waitTest.until(ExpectedConditions.visibilityOfElementLocated(By.className("suggestick-list"))).click();
@@ -54,6 +60,7 @@ public class MainPage {
                 "Region name on main page wasn't changed to " + newRegionName);
     }
 
+    @Step("Click settings button")
     public void clickSettingsButton(){
         Actions actor = new Actions(driver);
         actor.moveToElement(driver.findElement(By.cssSelector("span.header2-nav-item__icon." +
@@ -61,10 +68,12 @@ public class MainPage {
         driver.findElement(By.className("header2-user-menu__item_type_settings")).click();
     }
 
+    @Step("Click catalog button")
     public void pressCatalogButton(){
         driver.findElement(By.cssSelector("div.n-topmenu-new-vertical__left > div > button")).click();
     }
 
+    @Step("Choose electric toothbrushes in catalog")
     public void chooseElectricToothbrushes(){
         // waiting for opening the list of categories
         WebElement categoryList = waitTest.until(ExpectedConditions

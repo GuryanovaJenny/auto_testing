@@ -1,5 +1,6 @@
 package testClasses;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -13,6 +14,7 @@ public class SettingsPage {
         SettingsPage.driver = driver;
     }
 
+    @Step("Check region name and delivery region name")
     public void checkDeliveryRegionName(){
         WebElement regions_line = driver.findElement(By.className("region-form-opener"))
                                         .findElement(By.className("link__inner"));

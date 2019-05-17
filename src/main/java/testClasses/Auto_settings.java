@@ -19,8 +19,17 @@ public class Auto_settings {
     private static EventFiringWebDriver driver;
     private static WebDriverWait waitTest;
 
+    protected static WebDriver getDriver() {
+        return driver;
+    }
+    protected static WebDriverWait getWaitTest() {
+        return waitTest;
+    }
+
     @BeforeClass
-    public static void setupClass() { WebDriverManager.chromedriver().setup();}
+    public static void setupClass() {
+        WebDriverManager.chromedriver().setup();
+    }
 
     @BeforeMethod
     public void setupTest() {
@@ -32,13 +41,6 @@ public class Auto_settings {
         driver.get("https://beru.ru/");
         waitTest = new WebDriverWait(driver, 10);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-    }
-
-    protected static WebDriver getDriver() {
-        return driver;
-    }
-    protected static WebDriverWait getWaitTest() {
-        return waitTest;
     }
 
     @AfterMethod

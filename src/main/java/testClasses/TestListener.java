@@ -14,6 +14,6 @@ public class TestListener extends TestListenerAdapter {
 
     @Attachment(value = "Page screenshot", type = "image/png")
     private byte[] saveScreenShot() {
-        return ((TakesScreenshot) Auto_settings.getDriver()).getScreenshotAs(OutputType.BYTES);
+        return ((TakesScreenshot) DriverSettings.getDriver()).getScreenshotAs(OutputType.BYTES);
     }
 }

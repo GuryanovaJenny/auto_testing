@@ -10,7 +10,7 @@ import org.openqa.selenium.support.events.AbstractWebDriverEventListener;
 public class WebDriverEventListener extends AbstractWebDriverEventListener {
     @Attachment(value = "Page screenshot", type = "image/png")
     private byte[] getScreenshot() {
-        return ((TakesScreenshot) Auto_settings.getDriver()).getScreenshotAs(OutputType.BYTES);
+        return ((TakesScreenshot) DriverSettings.getDriver()).getScreenshotAs(OutputType.BYTES);
     }
 
     @Override

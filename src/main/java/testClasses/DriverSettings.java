@@ -14,7 +14,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 import java.util.concurrent.TimeUnit;
 
-public class Auto_settings {
+public class DriverSettings {
 
     private static EventFiringWebDriver driver;
     private static WebDriverWait waitTest;

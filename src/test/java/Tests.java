@@ -4,7 +4,7 @@ import testClasses.*;
 import org.testng.annotations.DataProvider;
 
 @Listeners(TestListener.class)
-public class Tests extends Auto_settings {
+public class Tests extends DriverSettings {
 
     @DataProvider(name = "regionChangeTest")
     public Object[][] createData() {
